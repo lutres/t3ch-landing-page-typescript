@@ -4,7 +4,6 @@ import Logo from "@/assets/Logo.png";
 import Link from "./Link";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import ActionButton from "@/shared/ActionButton";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 
 type Props = {
@@ -72,7 +71,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             ) : (
               <button
                 className="rounded-full bg-secondary-500 p-2"
-                onClick={() => cycleOpen(0)}
+                onClick={() => cycleOpen(1)}
               >
                 <Bars3Icon className="h-6 w-6 text-white" />
               </button>
@@ -83,7 +82,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 
       {/* Mobile Menu Modal */}
       <AnimatePresence>
-      {!isAboveMediumScreens && open === 0 && (
+      {!isAboveMediumScreens && open === 1 && (
           <motion.aside
             className="fixed right-0 bottom-0 z-40 h-full bg-primary-100 shadow-2xl drop-shadow-xl"
             initial={{ width: 0 }}
@@ -103,7 +102,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             >
               {/* Close Icon */}
               <motion.div className="flex justify-end p-8">
-                <motion.button onClick={() => cycleOpen(1)}>
+                <motion.button onClick={() => cycleOpen(0)}>
                   <XMarkIcon className="h-6 w-6 text-gray-400" />
                 </motion.button>
               </motion.div>
