@@ -34,7 +34,7 @@ const cards: Array<CardsType> = [
 const container = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.5 },
+    transition: { staggerChildren: 0.3 },
   },
 };
 
