@@ -1,10 +1,12 @@
 import { SelectedPage } from "@/shared/types";
 import ActionButton from "@/shared/ActionButton";
-import HomePageText from "@/assets/HomePageText.png";
-import HomePageGraphic from "@/assets/HomePageGraphic.png";
-import SponsorRedBull from "@/assets/SponsorRedBull.png";
-import SponsorForbes from "@/assets/SponsorForbes.png";
-import SponsorFortune from "@/assets/SponsorFortune.png";
+import LogoPageText from "@/assets/LogoPageText.png";
+import HomePageGraphic from "@/assets/HomePageGraphic.jpg";
+import ClientCinesUnidos from "@/assets/ClientCinesUnidos.png"
+import ClientCinex from "@/assets/ClientCinex.png"
+import ClientGama from "@/assets/ClientGama.png"
+import ClientLuvebras from "@/assets/ClientLuvebras.png"
+import ClientQuickPress from "@/assets/ClientQuickPress.png"
 import useMediaQuery from "@/hooks/useMediaQuery";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import { motion } from "framer-motion";
@@ -17,9 +19,12 @@ const Home = ({ setSelectedPage }: Props) => {
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px");
 
   return (
-    <section id="home" className="gap-16 bg-gray-20 py-10 md:h-full md:pb-0">
+    <section id="inicio" className="gap-16 bg-gray-20 pt-10 md:h-full md:pb-0">
       {/* Image and Main Header */}
-      <motion.div className="mx-auto w-5/6 items-center justify-center md:flex md:h-5/6" onViewportEnter={() => setSelectedPage(SelectedPage.Home)}>
+      <motion.div
+        className="mx-auto w-5/6 items-center justify-center md:flex md:h-5/6"
+        onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
+      >
         {/* Main Header */}
         <div className="z-10 mt-32 md:basis-3/5">
           {/* Headings */}
@@ -35,14 +40,13 @@ const Home = ({ setSelectedPage }: Props) => {
             }}
           >
             <div className="relative">
-              <div className="before:absolute before:-top-20 before:-left-20 before:z-[-1] md:before:content-evolvetext">
-                <img src={HomePageText} alt="home-page-text" />
+              <div className="before:absolute before:-top-20 before:-left-60 before:opacity-70 before:z-[-1] md:before:content-blurredlogo">
+                <img src={LogoPageText} alt="home-page-text" />
               </div>
             </div>
-            <p className="mt-8 text-sm">
-              Unrivaled Gym. Unparalleled Training Fitness Classes. World Class
-              Studios to get the Body Shapes That you Dream of... Get your Dream
-              Body Now.
+            <p className="mt-8 text-lg">
+              Tu mejor opción en equipos fiscales, servicios POS, sistemas
+              administrativos y tecnología para tu negocio.
             </p>
           </motion.div>
           {/* Actions */}
@@ -58,30 +62,32 @@ const Home = ({ setSelectedPage }: Props) => {
             }}
           >
             <ActionButton setSelectedPage={setSelectedPage}>
-              Join Now
+              Cotizar
             </ActionButton>
             <AnchorLink
-              className="text-sm font-bold text-primary-500 underline hover:text-secondary-500"
-              onClick={() => setSelectedPage(SelectedPage.ContactUs)}
-              href={`#${SelectedPage.ContactUs}`}
+              className="text-sm font-bold text-primary-500 underline hover:text-gray-500"
+              onClick={() => setSelectedPage(SelectedPage.AboutUs)}
+              href={`#${SelectedPage.AboutUs}`}
             >
-              <p>Learn More</p>
+              <p>Más información</p>
             </AnchorLink>
           </motion.div>
         </div>
         {/* Image */}
-        <div className="flex basis-3/5 justify-center md:z-10 md:ml-40 md:mt-16 md:justify-items-end">
+        <div className="flex basis-3/5 justify-center md:z-10 md:ml-40 mt-16 md:justify-items-end">
           <img src={HomePageGraphic} alt="home-pageGraphic" />
         </div>
       </motion.div>
       {/* Sponsors */}
       {isAboveMediumScreens && (
         <div className="h-[150px] w-full bg-primary-100 py-10">
-          <div className="mx-auto w-5/6">
+          <div className="mx-auto w-5/6 flex align-center">
             <div className="flex w-full items-center justify-between gap-8">
-              <img src={SponsorRedBull} alt="redbull-sponsor" />
-              <img src={SponsorForbes} alt="forbes-sponsor" />
-              <img src={SponsorFortune} alt="fortune-sponsor" />
+              <img src={ClientCinesUnidos} alt="redbull-sponsor" className="h-16"/>
+              <img src={ClientCinex} alt="forbes-sponsor" className="h-16"/>
+              <img src={ClientGama} alt="fortune-sponsor" className="h-16"/>
+              <img src={ClientLuvebras} alt="fortune-sponsor" className="h-16"/>
+              <img src={ClientQuickPress} alt="fortune-sponsor" className="h-16"/>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from "./Link";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ActionButton from "@/shared/ActionButton";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 
 type Props = {
   isTopOfPage: boolean;
@@ -12,55 +13,66 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
+const sideVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+};
+
 const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px");
-  const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
+  const [open, cycleOpen] = useCycle<boolean>(false, true);
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
 
   return (
     <nav>
-      <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-6`}>
+      <div
+        className={`${navbarBackground} ${flexBetween} fixed z-30 w-full py-2`}
+      >
         <div className={`${flexBetween} mx-auto w-5/6`}>
           <div className={`${flexBetween} w-full gap-16`}>
             {/* Left Side */}
-            <img src={Logo} alt="logo" />
+            <img src={Logo} alt="logo" className="h-16" />
             {/* Right Side */}
             {isAboveMediumScreens ? (
-              <div className={`${flexBetween} w-full`}>
+              <div className={`${flexBetween}`}>
                 <div className={`${flexBetween} gap-8 text-sm`}>
                   <Link
-                    page="Home"
+                    page="Inicio"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Benefits"
+                    page="Sobre Nosotros"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Our Classes"
+                    page="Productos"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Contact Us"
+                    page="Contáctanos"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
-                </div>
-                <div className={`${flexBetween} gap-8`}>
-                  <p>Sign In</p>
-                  <ActionButton setSelectedPage={setSelectedPage}>
-                    Become a Member
-                  </ActionButton>
                 </div>
               </div>
             ) : (
               <button
                 className="rounded-full bg-secondary-500 p-2"
-                onClick={() => setIsMenuToggled(!isMenuToggled)}
+                onClick={() => cycleOpen()}
               >
                 <Bars3Icon className="h-6 w-6 text-white" />
               </button>
@@ -70,39 +82,58 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
       </div>
 
       {/* Mobile Menu Modal */}
-      {!isAboveMediumScreens && isMenuToggled && (
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
-          {/* Close Icon */}
-          <div className="flex justify-end p-12">
-            <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
-              <XMarkIcon className="h-6 w-6 text-gray-400" />
-            </button>
-          </div>
-          {/* Menu Icons */}
-          <div className="ml-[33%] flex flex-col gap-10 text-2xl">
-            <Link
-              page="Home"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-            />
-            <Link
-              page="Benefits"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-            />
-            <Link
-              page="Our Classes"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-            />
-            <Link
-              page="Contact Us"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-            />
-          </div>
-        </div>
+      <AnimatePresence>
+      {!isAboveMediumScreens && open && (
+          <motion.aside
+            className="fixed right-0 bottom-0 z-40 h-full bg-primary-100 shadow-2xl drop-shadow-xl"
+            initial={{ width: 0 }}
+            animate={{ width: 250, transition: { duration: 0.3} }}
+            exit={{
+              width: 0,
+              transition: { duration: 0.3 },
+            }}
+            variants={sideVariants}
+          >
+            <motion.div
+              className="container"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={sideVariants}
+            >
+              {/* Close Icon */}
+              <motion.div className="flex justify-end p-8">
+                <motion.button onClick={() => cycleOpen(!open)}>
+                  <XMarkIcon className="h-6 w-6 text-gray-400" />
+                </motion.button>
+              </motion.div>
+              {/* Menu Icons */}
+              <div className="ml-4 flex flex-col gap-10 text-xl">
+                <Link
+                  page="Inicio"
+                  selectedPage={selectedPage}
+                  setSelectedPage={setSelectedPage}
+                />
+                <Link
+                  page="Sobre Nosotros"
+                  selectedPage={selectedPage}
+                  setSelectedPage={setSelectedPage}
+                />
+                <Link
+                  page="Productos"
+                  selectedPage={selectedPage}
+                  setSelectedPage={setSelectedPage}
+                />
+                <Link
+                  page="Contáctanos"
+                  selectedPage={selectedPage}
+                  setSelectedPage={setSelectedPage}
+                />
+              </div>
+            </motion.div>
+          </motion.aside>
       )}
+      </AnimatePresence>
     </nav>
   );
 };

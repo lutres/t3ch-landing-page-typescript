@@ -9,8 +9,8 @@ const Footer = ({ setSelectedPage }: Props) => {
   return (
     <footer className="bg-primary-100 py-16">
       <div className="justify-content mx-auto w-5/6 gap-16 md:flex">
-        <div className="basis-1/2 mt-16 md:mt-0">
-          <img src={Logo} alt="logo" />
+        <div className="mt-16 basis-1/2 md:mt-0">
+          <img src={Logo} alt="logo" className="h-16" />
           <p className="my-5">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -18,16 +18,25 @@ const Footer = ({ setSelectedPage }: Props) => {
           </p>
           <p>© All Rights Reserved.</p>
         </div>
-        <div className="mt-16 basis-1/4 md:mt-0">
-            <h4 className="font-bold">Links</h4>
-            <p className="my-5">Massa orci senectus</p>
-            <p className="my-5">Et gravida id et etiam</p>
-            <p className="my-5">Ullamcorper vivamus</p>
+        <div className="my-16 flex basis-1/4 flex-col gap-4 md:mt-0">
+          <h4 className="font-bold">Links</h4>
+          <a href="https://wa.me/+584125666802" target="_blank">
+            Whatsapp
+          </a>
+          <a
+            href="https://www.instagram.com/t3ch.sistemas/?hl=es-la"
+            target="_blank"
+          >
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/T3chSistemasCa" target="_blank">
+            Facebook
+          </a>
         </div>
-        <div>
-        <h4 className="font-bold">Contact Us</h4>
-            <p className="my-5">Tempus metus mattis risus volutpat egaes</p>
-            <p className="my-5">(333)425-6825</p>
+        <div className=" flex basis-1/4 flex-col gap-4 md:mt-0">
+          <h4 className="font-bold">Contact Us</h4>
+          <a href="mailto:ventas@t3chsistemas.com" target="_blank">ventas@t3chsistemas.com</a>
+          <a href="tel:+582123184051">(0212) 318 40 51</a>
         </div>
       </div>
     </footer>

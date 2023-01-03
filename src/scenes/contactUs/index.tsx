@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { SelectedPage } from "@/shared/types";
 import { motion } from "framer-motion";
-import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
+import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.jpg";
 import HText from "@/shared/HText";
 
 type Props = {
@@ -25,7 +25,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="contactus" className="mx-auto w-5/6 pt-24 pb-32">
+    <section id="contáctanos" className="mx-auto w-5/6 pt-24 pb-32">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.ContactUs)}
       >
@@ -42,20 +42,13 @@ const ContactUs = ({ setSelectedPage }: Props) => {
           }}
         >
           <HText>
-            <span className="text-primary-500">JOIN NOW</span> TO GET IN SHAPE
+            PONTE EN CONTACTO CON{" "}
+            <span className="text-primary-500">NOSOTROS</span>
           </HText>
-          <p className="my-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
         </motion.div>
-        {/* Form and Image */}
-        <div className="mt-10 justify-between gap-8 md:flex">
+        {/* Content */}
+        <div className="md:flex gap-8 align-middle">
+          {/* Text and Form */}
           <motion.div
             className="mt-10 basis-3/5 md:mt-0"
             initial="hidden"
@@ -67,6 +60,15 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
+            <p className="my-5">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
             <form
               action="https://formsubmit.co/wohusace@maildim.com"
               target="_blank"
@@ -76,7 +78,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               <input
                 type="text"
                 className={inputStyles}
-                placeholder="NAME"
+                placeholder="NOMBRE"
                 {...register("name", {
                   required: true,
                   maxLength: 100,
@@ -92,7 +94,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               <input
                 type="email"
                 className={inputStyles}
-                placeholder="EMAIL"
+                placeholder="CORREO"
                 {...register("email", {
                   required: true,
                   pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -104,11 +106,29 @@ const ContactUs = ({ setSelectedPage }: Props) => {
                   {errors.email.type === "pattern" && "Invalid email address"}
                 </p>
               )}
+              <input
+                type="tel"
+                className={inputStyles}
+                placeholder="TELÉFONO"
+                {...register("number", {
+                  required: true,
+                  minLength: 11,
+                  maxLength: 13,
+                })}
+              />
+              {errors.number && (
+                <p className="mt-1 text-primary-500">
+                  {errors.number.type === "required" &&
+                    "This field ir required"}
+                  {errors.number.type === "minLength" && "Invalid phone number"}
+                  {errors.number.type === "maxLength" && "Invalid phone number"}
+                </p>
+              )}
               <textarea
                 rows={4}
                 cols={50}
                 className={inputStyles}
-                placeholder="MESSAGE"
+                placeholder="MENSAJE"
                 {...register("message", {
                   required: true,
                   maxLength: 2000,
@@ -123,15 +143,16 @@ const ContactUs = ({ setSelectedPage }: Props) => {
                 </p>
               )}
               <button
-                className="rounded-lg mt-5 bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+                className="mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
                 type="submit"
               >
-                SUBMIT
+                ENVIAR
               </button>
             </form>
           </motion.div>
+          {/* Image */}
           <motion.div
-            className="relative mt-16 basis-2/5 md:mt-0"
+            className="relative basis-2/5 mt-10 md:mt-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -141,11 +162,11 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            <div className="w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1] md:before:content-evolvetext">
+            <div className="w-full before:absolute before:-bottom-64 before:-right-10 before:opacity-75 before:z-[-1] md:before:content-blurredlogo">
               <img
                 src={ContactUsPageGraphic}
                 alt="contact-us-page-graphic"
-                className="w-full"
+                className="mx-auto rounded-md max-h-[600px]"
               />
             </div>
           </motion.div>

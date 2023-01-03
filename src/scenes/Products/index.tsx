@@ -1,42 +1,44 @@
-import { ClassType, SelectedPage } from "@/shared/types";
-import image1 from "@/assets/image1.png";
-import image2 from "@/assets/image2.png";
-import image3 from "@/assets/image3.png";
-import image4 from "@/assets/image4.png";
-import image5 from "@/assets/image5.png";
-import image6 from "@/assets/image6.png";
+import { ProductType, SelectedPage } from "@/shared/types";
+import FiscalPrinters from "@/assets/FiscalPrinters.jpeg";
+import AdministrativeSoftware from "@/assets/AdministrativeSoftware.jpg";
+import Hardware from "@/assets/Hardware.jpg";
+import Periferics from "@/assets/Periferics.jpg";
+import TechnicalService from "@/assets/TechnicalService.jpg";
+import Assesory from "@/assets/Assesory.jpg";
 import { motion } from "framer-motion";
 import HText from "@/shared/HText";
-import Class from "./Class";
+import Product from "./Product";
 
-const classes: Array<ClassType> = [
+const products: Array<ProductType> = [
     {
-        name: "Weight Training Classes",
+        title: "Impresoras Fiscales",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: image1
+        image: FiscalPrinters
     },
     {
-        name: "Fitness Classes",
-        image: image2
-    },
-    {
-        name: "Training Classes",
+        title: "Software Administrativo",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: image3
+        image: AdministrativeSoftware
     },
     {
-        name: "Adventure Classes",
+        title: "Hardware",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: image4
+        image: Hardware
     },
     {
-        name: "Ab Core Classes",
-        image: image5
-    },
-    {
-        name: "Yoga Classes",
+        title: "Periféricos",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: image6
+        image: Periferics
+    },
+    {
+        title: "Servicio Técnico",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        image: TechnicalService
+    },
+    {
+        title: "Inducciones",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        image: Assesory
     },
 ]
 
@@ -44,11 +46,11 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const OurClasses = ({ setSelectedPage }: Props) => {
+const Products = ({ setSelectedPage }: Props) => {
   return (
-    <section id="ourClasses" className="w-full bg-primary-100 py-4">
+    <section id="productos" className="w-full bg-primary-100 py-24">
       <motion.div
-        onViewportEnter={() => setSelectedPage(SelectedPage.OurClasses)}
+        onViewportEnter={() => setSelectedPage(SelectedPage.Products)}
       >
         <motion.div
           className="mx-auto w-5/6"
@@ -62,7 +64,7 @@ const OurClasses = ({ setSelectedPage }: Props) => {
           }}
         >
           <div className="md:w-3/5">
-            <HText>OUR CLASSES</HText>
+            <HText>NUESTROS PRODUCTOS</HText>
             <p className="py-5">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -74,11 +76,11 @@ const OurClasses = ({ setSelectedPage }: Props) => {
             </p>
           </div>
         </motion.div>
-        <div className="mt-10 h-[353px] mx-auto w-5/6 overflow-x-auto overflow-y-hidden">
-          <ul className="w-[2800px] whitespace-nowrap">
-            {classes.map((item: ClassType, index) => (
-                <Class
-                key={`${item.name}-${index}`} name={item.name} description={item.description} image={item.image}/>
+        <div className="mt-10 mx-auto w-5/6">
+          <ul className="grid gap-8 md:grid-cols-3">
+            {products.map((item: ProductType, index) => (
+                <Product
+                key={`${item.title}-${index}`} title={item.title} description={item.description} image={item.image}/>
             ))}
           </ul>
         </div>
@@ -87,4 +89,4 @@ const OurClasses = ({ setSelectedPage }: Props) => {
   );
 };
 
-export default OurClasses;
+export default Products;
