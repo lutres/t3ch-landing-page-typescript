@@ -20,16 +20,16 @@ const Footer = ({ setSelectedPage }: Props) => {
         </div>
         <div className="my-16 flex basis-1/4 flex-col gap-4 md:mt-0">
           <h4 className="font-bold">Links</h4>
-          <a href="https://wa.me/+584125666802" target="_blank">
+          <a href="https://wa.me/+584125666802" target="_blank" className="underline">
             Whatsapp
           </a>
           <a
             href="https://www.instagram.com/t3ch.sistemas/?hl=es-la"
-            target="_blank"
+            target="_blank" className="underline"
           >
             Instagram
           </a>
-          <a href="https://www.facebook.com/T3chSistemasCa" target="_blank">
+          <a href="https://www.facebook.com/T3chSistemasCa" target="_blank" className="underline">
             Facebook
           </a>
         </div>
